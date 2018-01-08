@@ -31,5 +31,24 @@
  Redux와 같은 컨테이너를 사용해서 데이터를 흐름을 제어할 수가 있다. 직접 setState을 호출하지 않고
  Redux를 사용해서 state 값을 수정하게 된다.
  18. Stylesheet으로 꾸미기를 할 때 각 컴포넌트의 JSX에 적용을 해야 한다. 하나의 컴포넌트로서 스타일시트를 관리할 수도 있고 동시에 여러 개의 스타일을 적용할 수도 있다.
- 19. 
+ 19. View안에 View를 넣을 수가 있다 내부에 있는 뷰는 self태그와 같이 독립적으로 닫으면 된다.
+ 20. flex로 view의 넓이는 조정하거나 width, height로 조정하게 된다. 대신 가장 바깥쪽에 있는 View 엘리먼트에 flex값이 설정되어 있어야 이에 감싼 컴포넌트가 보이게 된다
+ 21. 레이아웃 관련 프러퍼티는 아래 링크를 참고한다
+ https://facebook.github.io/react-native/docs/layout-props.html
+ 22. View는 자체적으로 닫기도 하고 쌍으로 닫기도 한다. 헷갈리네.
+ 23. 이벤트를 통해서 함수를 호춣하기 위해서는 render 함수 바깥쪽에서 선언을 해야 한다.
+ 24. 가장 바깥쪽에 ScrollView로 감싸고 있어야 view가 넘쳐도 터치 스크롤이 가능하다.
+ 25. FlatList와 SectionList와의 차이점은 알겠는데 쓰임이 정확히 파악이 안된다.
+ 26. 서버로부터 데이터를 가져와서 데이터를 입히는 과정 (FetchAPI)
+ https://developer.mozilla.org/en-US/docs/Web/API/Request
+ 27. 컴퍼넌트가 마운트 되었을 때 데이터를 불러온다. componentDidMount(){... fetch ...}
+ 28. fetch 대신 axios나 frisbee 등을 사용할 것을 고려해보자
+ https://facebook.github.io/react-native/docs/network.html
+ 29. 데이터를 핸들링 하기 위한 라이브러리 사용에 대해서 비디오로 이해하기
+ https://egghead.io/courses/getting-started-with-redux
+ 30. Development Tools 부분을 자세히 살펴볼 것
+ https://facebook.github.io/react-native/docs/more-resources.html
+ 31. 기본적인 컴퍼넌트를 살펴본다.
+ https://facebook.github.io/react-native/docs/components-and-apis.html
+ 32. 
  
