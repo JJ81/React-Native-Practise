@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button, Text, View, StyleSheet, TextInput } from 'react-native';
 
 import ListItem from './src/components/ListItem/ListItem';
+import TextInputBox from './src/components/TextInputBox/TextInputBox';
+
 
 export default class App extends Component{
 
@@ -34,20 +36,14 @@ export default class App extends Component{
 
 		return (
 			<View style={styles.container}>
-				<View style={styles.inputContainer}>
-					<TextInput
-						style={styles.placeInput}
-						value={this.state.placeName}
-						onChangeText={this.placeNameChangedHandler}
-						placeholder='An Awesome place'
-						autoFocus
-					/>
-					<Button title="Add" style={styles.placeButton} onPress={this.placeSubmitHandler} />
-				</View>
+				<TextInputBox
+					placeName={this.state.placeName}
+					placeNameChangedHandler={this.placeNameChangedHandler}
+					placeSubmitHandler={this.placeSubmitHandler}
+				/>
 				<View style={styles.listContainer}>
 					{placesOutput}
 				</View>
-
 			</View>
 		);
 	}
