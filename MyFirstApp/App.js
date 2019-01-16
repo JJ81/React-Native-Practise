@@ -312,55 +312,92 @@
 // AppRegistry.registerComponent('AwesomeProject', () => HelloWorldApp);
 
 
-
 import React, { Component } from 'react';
-import { ActivityIndicator, ListView, Text, View, ScrollView } from 'react-native';
+import { Button, Text, View, StyleSheet, TextInput } from 'react-native';
 
-export default class Movies extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isLoading: true
+export default class App extends Component{
+
+	state= {
+		placeName : '',
+		places: []
+	};
+
+	placeNameChangedHandler = val => {
+		this.setState({placeName : val});
+	};
+
+	placeSubmitHandler = () => {
+		if(this.state.placeName.trim() === ''){
+			return;
 		}
-	}
-	
-	// 컴퍼넌트가 마운트 되었을 때
-	componentDidMount() {
-		// fetch를 통해서 then이 두 개나 붙어 있는데 이것들이 무엇을 하는지 알아보자.
-		return fetch('https://facebook.github.io/react-native/movies.json')
-			.then((response) => response.json())
-			.then((responseJson) => {
-				let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}); // ?
-				this.setState({
-					isLoading: false,
-					dataSource: ds.cloneWithRows(responseJson.movies), // ?
-				}, function() {
-					// do something with new state
-					// ?
-				});
-			})
-			.catch((error) => {
-				console.error(error);
-				// TODO 에러가 났을 경우 어떻게 처리를 할 것인가?
-			});
-	}
-	
-	render() {
-		if (this.state.isLoading) {
-			return (
-				<View style={{flex: 1, paddingTop: 20}}>
-					<ActivityIndicator />
-				</View>
-			);
-		}
-		
+
+		this.setState(prevState => {
+			return {
+				places : prevState.places.concat(prevState.placeName)
+			};
+		});
+
+	};
+
+	render(){
+		const placesOutput = this.state.places.map((place, i) => <Text key={i}>{place}</Text>);
+
 		return (
-			<ScrollView style={{flex: 1, paddingTop: 20}}>
-				<ListView
-					dataSource={this.state.dataSource}
-					renderRow={(rowData) => <Text>{rowData.title}, {rowData.releaseYear}</Text>}
-				/>
-			</ScrollView>
+			<View style={styles.container}>
+				<View style={styles.inputContainer}>
+					<TextInput
+						style={styles.placeInput}
+						value={this.state.placeName}
+						onChangeText={this.placeNameChangedHandler}
+						placeholder='An Awesome place'
+						autoFocus
+					/>
+					<Button title="Add" style={styles.placeButton} onPress={this.placeSubmitHandler} />
+				</View>
+				<View>
+					{placesOutput}
+				</View>
+
+			</View>
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	container : {
+		flex : 1,
+		alignItems : 'center',
+		//justifyContent: 'center',
+		justifyContent: 'flex-start',
+		backgroundColor : 'white',
+		// paddingTop: 100
+	},
+
+	inputContainer : {
+		// flex : 1,
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		paddingTop: 30,
+		paddingLeft: 10,
+		paddingRight: 10,
+		alignItems: 'center'
+	},
+
+	placeInput : {
+		width: '80%'
+	},
+
+	placeButton : {
+		width: '20%'
+	},
+
+	inputBox : {
+		// alignItems: 'center',
+		// justifyContent: 'center',
+		// backgroundColor: '#eee',
+		// height: 60,
+		// padding: 10,
+		// width: '100%'
+	}
+});
